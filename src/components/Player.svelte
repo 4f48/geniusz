@@ -69,7 +69,7 @@
 <style>
     th {
         background-color: blue;
-        padding: 1.5rem;
+        padding: 2vw;
         cursor: pointer;
     }
 
