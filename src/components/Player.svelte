@@ -17,6 +17,8 @@
         for (let l = 0; l < 7; l++) {
             if (INVISIBLES.includes(k) && INVISIBLES.includes(l)) {
                 temp.push("invisible");
+            } else if (k == 3 && l == 3) {
+                temp.push("invisible");
             } else {
                 temp.push("visible");
             }
