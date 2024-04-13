@@ -24,7 +24,37 @@
         map.push(temp);
     }
 
+    function check_win() {
+        let count = 0;
+
+        for (const col in map) {
+            for (const field in map[col]) {
+                if (count > 1) {
+                    return 0;
+                }
+
+                if (map[col][field] != "invisible") {
+                    count = count + 1;
+                }
+            }
+        }
+
+        if (count == 1) {
+            setTimeout(() => {
+                alert("YOU WIN!");
+                location.reload();
+            }, 1000);
+        }
+    }
+
+    let buf: Array<number>;
+    let timing: boolean = false;
     function handle_click(i: number, j: number) {
+        if (timing == false) {
+            timing = true;
+            time();
+        }
+
         let destinations: Array<Array<number>> = [
             [i - 2, j],
             [i + 2, j],
@@ -36,22 +66,62 @@
             for (const col in map) {
                 for (const field in map[col]) {
                     if (map[col][field] == "destination") {
-                        map[col][field] = "visible";
+                        map[col][field] = "invisible";
                     }
                 }
             }
 
             for (const destination of destinations) {
                 try {
-                    if (map[destination[0]][destination[1]] == "visible") {
+                    if (map[destination[0]][destination[1]] == "invisible") {
                         map[destination[0]][destination[1]] = "destination";
                     }
                 } catch {}
             }
+        } else if (map[i][j] == "destination") {
+            for (const col in map) {
+                for (const field in map[col]) {
+                    if (map[col][field] == "destination") {
+                        map[col][field] = "invisible";
+                    }
+                }
+            }
+
+            map[i][j] = "visible";
+            map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
+            map[buf[0]][buf[1]] = "invisible";
         }
+
+        buf = [i, j];
+        check_win();
+    }
+
+    check_win();
+
+    let timer: Array<number> = [0, 0, 0];
+    function time() {
+        setInterval(() => {
+            if (timer[2] < 99) {
+                timer[2] = timer[2] + 1;
+            } else {
+                timer[2] = 0;
+                timer[1] = timer[1] + 1;
+            }
+
+            if (timer[1] >= 60) {
+                timer[1] = 0;
+                timer[0] = timer[0] + 1;
+            }
+        }, 10);
     }
 </script>
 
+<p>
+    {timer[0]}:{timer[1] < 10 ? 0 + timer[1].toString() : timer[1]}:{timer[2] <
+    10
+        ? 0 + timer[2].toString()
+        : timer[2]}
+</p>
 <table>
     <tbody>
         {#each rows as row, i}
@@ -92,7 +162,14 @@
 
     table {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    p {
+        font-size: 24px;
+        font-weight: bold;
+        position: fixed;
     }
 </style>
