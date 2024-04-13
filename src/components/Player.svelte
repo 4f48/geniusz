@@ -32,20 +32,22 @@
             [i, j + 2],
         ];
 
-        for (const col in map) {
-            for (const field in map[col]) {
-                if (map[col][field] == "destination") {
-                    map[col][field] = "visible";
+        if (map[i][j] == "visible") {
+            for (const col in map) {
+                for (const field in map[col]) {
+                    if (map[col][field] == "destination") {
+                        map[col][field] = "visible";
+                    }
                 }
             }
-        }
 
-        for (const destination of destinations) {
-            try {
-                if (map[destination[0]][destination[1]] == "visible") {
-                    map[destination[0]][destination[1]] = "destination";
-                }
-            } catch {}
+            for (const destination of destinations) {
+                try {
+                    if (map[destination[0]][destination[1]] == "visible") {
+                        map[destination[0]][destination[1]] = "destination";
+                    }
+                } catch {}
+            }
         }
     }
 </script>
@@ -77,6 +79,7 @@
         background-color: transparent;
         color: transparent;
         cursor: default;
+        user-select: none;
     }
 
     .visible:hover {
