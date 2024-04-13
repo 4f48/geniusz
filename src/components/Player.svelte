@@ -16,7 +16,7 @@
         const temp: Array<string> = [];
         for (let l = 0; l < 7; l++) {
             if (INVISIBLES.includes(k) && INVISIBLES.includes(l)) {
-                temp.push("invisible");
+                temp.push("disabled");
             } else if (k == 3 && l == 3) {
                 temp.push("invisible");
             } else {
@@ -148,6 +148,13 @@
     }
 
     .invisible {
+        background-color: transparent;
+        color: transparent;
+        cursor: default;
+        user-select: none;
+    }
+
+    .disabled {
         background-color: transparent;
         color: transparent;
         cursor: default;
