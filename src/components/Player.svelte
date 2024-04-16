@@ -35,7 +35,7 @@
                     return 0;
                 }
 
-                if (map[col][field] != "invisible") {
+                if (map[col][field] != "invisible" && map[col][field] != "disabled") {
                     count = count + 1;
                 }
             }
@@ -43,7 +43,7 @@
 
         if (count == 1) {
             setTimeout(() => {
-                alert("YOU WIN!");
+                alert("YOU ARE A GENIUS!");
                 location.reload();
             }, 1000);
         }
