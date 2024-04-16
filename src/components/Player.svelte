@@ -52,50 +52,54 @@
     let buf: Array<number>;
     let timing: boolean = false;
     function handle_click(i: number, j: number) {
-        if (timing == false) {
-            timing = true;
-            time();
-        }
+        if (map[i][j] != "disabled" && map[i][j] != "invisible") {
+            if (timing == false) {
+                timing = true;
+                time();
+            }
 
-        let destinations: Array<Array<number>> = [
-            [i - 2, j],
-            [i + 2, j],
-            [i, j - 2],
-            [i, j + 2],
-        ];
+            let destinations: Array<Array<number>> = [
+                [i - 2, j],
+                [i + 2, j],
+                [i, j - 2],
+                [i, j + 2],
+            ];
 
-        if (map[i][j] == "visible") {
-            for (const col in map) {
-                for (const field in map[col]) {
-                    if (map[col][field] == "destination") {
-                        map[col][field] = "invisible";
+            if (map[i][j] == "visible") {
+                for (const col in map) {
+                    for (const field in map[col]) {
+                        if (map[col][field] == "destination") {
+                            map[col][field] = "invisible";
+                        }
                     }
                 }
-            }
 
-            for (const destination of destinations) {
-                try {
-                    if (map[destination[0]][destination[1]] == "invisible") {
-                        map[destination[0]][destination[1]] = "destination";
-                    }
-                } catch {}
-            }
-        } else if (map[i][j] == "destination") {
-            for (const col in map) {
-                for (const field in map[col]) {
-                    if (map[col][field] == "destination") {
-                        map[col][field] = "invisible";
+                for (const destination of destinations) {
+                    try {
+                        if (
+                            map[destination[0]][destination[1]] == "invisible"
+                        ) {
+                            map[destination[0]][destination[1]] = "destination";
+                        }
+                    } catch {}
+                }
+            } else if (map[i][j] == "destination") {
+                for (const col in map) {
+                    for (const field in map[col]) {
+                        if (map[col][field] == "destination") {
+                            map[col][field] = "invisible";
+                        }
                     }
                 }
+
+                map[i][j] = "visible";
+                map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
+                map[buf[0]][buf[1]] = "invisible";
             }
 
-            map[i][j] = "visible";
-            map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
-            map[buf[0]][buf[1]] = "invisible";
+            buf = [i, j];
+            check_win();
         }
-
-        buf = [i, j];
-        check_win();
     }
 
     check_win();
