@@ -52,7 +52,7 @@
     let buf: Array<number>;
     let timing: boolean = false;
     function handle_click(i: number, j: number) {
-        if (map[i][j] != "disabled") {
+        if (map[i][j] != "disabled" && map[i][j] != "invisible") {
             if (timing == false) {
                 timing = true;
                 time();
