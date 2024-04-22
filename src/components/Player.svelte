@@ -48,12 +48,18 @@
                 if (map[i - 1][j] == "active") {
                     destinations.push([i - 2, j]);
                 }
+            } catch {}
+            try {
                 if (map[i + 1][j] == "active") {
                     destinations.push([i + 2, j]);
                 }
+            } catch {}
+            try {
                 if (map[i][j - 1] == "active") {
                     destinations.push([i, j - 2]);
                 }
+            } catch {}
+            try {
                 if (map[i][j + 1] == "active") {
                     destinations.push([i, j + 2]);
                 }
