@@ -20,105 +20,106 @@
             } else if (k == 3 && l == 3) {
                 temp.push("invisible");
             } else {
-                temp.push("visible");
+                temp.push("active");
             }
         }
         map.push(temp);
     }
 
-    function check_win() {
-        let count = 0;
-
-        for (const col in map) {
-            for (const field in map[col]) {
-                if (count > 1) {
-                    return 0;
-                }
-
-                if (map[col][field] != "invisible" && map[col][field] != "disabled") {
-                    count = count + 1;
-                }
-            }
-        }
-
-        if (count == 1) {
-            setTimeout(() => {
-                alert("YOU ARE A GENIUS!");
-                location.reload();
-            }, 1000);
-        }
-    }
-
+    let destinations: Array<Array<number>> = [];
     let buf: Array<number>;
     let timing: boolean = false;
+    let timer: Array<number> = [0, 0, 0];
+
     function handle_click(i: number, j: number) {
-        if (map[i][j] != "disabled" && map[i][j] != "invisible") {
-            if (timing == false) {
-                timing = true;
-                time();
+        if (map[i][j] == "active") {
+            // Clear previous destination squares
+            destinations = [];
+            for (const row in map) {
+                for (const square in map[row]) {
+                    if (map[row][square] == "destination") {
+                        map[row][square] = "invisible";
+                    }
+                }
             }
 
-            let destinations: Array<Array<number>> = [
-                [i - 2, j],
-                [i + 2, j],
-                [i, j - 2],
-                [i, j + 2],
-            ];
+            // Check for new squares to move to
+            try {
+                if (map[i - 1][j] == "active") {
+                    destinations.push([i - 2, j]);
+                }
+                if (map[i + 1][j] == "active") {
+                    destinations.push([i + 2, j]);
+                }
+                if (map[i][j - 1] == "active") {
+                    destinations.push([i, j - 2]);
+                }
+                if (map[i][j + 1] == "active") {
+                    destinations.push([i, j + 2]);
+                }
+            } catch {}
 
-            if (map[i][j] == "visible") {
-                for (const col in map) {
-                    for (const field in map[col]) {
-                        if (map[col][field] == "destination") {
-                            map[col][field] = "invisible";
-                        }
+            for (const destination of destinations) {
+                try {
+                    if (map[destination[0]][destination[1]] == "invisible") {
+                        map[destination[0]][destination[1]] = "destination";
                     }
-                }
-
-                for (const destination of destinations) {
-                    try {
-                        if (
-                            map[destination[0]][destination[1]] == "invisible"
-                        ) {
-                            map[destination[0]][destination[1]] = "destination";
-                        }
-                    } catch {}
-                }
-            } else if (map[i][j] == "destination") {
-                for (const col in map) {
-                    for (const field in map[col]) {
-                        if (map[col][field] == "destination") {
-                            map[col][field] = "invisible";
-                        }
-                    }
-                }
-
-                map[i][j] = "visible";
-                map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
-                map[buf[0]][buf[1]] = "invisible";
+                } catch {}
             }
 
             buf = [i, j];
-            check_win();
+        } else if (map[i][j] == "destination") {
+            // Clear other destination squares
+            destinations = [];
+            for (const row in map) {
+                for (const square in map[row]) {
+                    if (map[row][square] == "destination") {
+                        map[row][square] = "invisible";
+                    }
+                }
+            }
+
+            map[i][j] = "active";
+            map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
+            map[buf[0]][buf[1]] = "invisible";
+
+            // Check if the player has won
+            let count = 0;
+            for (const row in map) {
+                for (const square in map[row]) {
+                    if (map[row][square] == "active") {
+                        count = count + 1;
+                    }
+                }
+            }
+            if (count == 1) {
+                if (
+                    window.confirm("You are a GENIUS! Press OK to reload page.")
+                ) {
+                    location.reload();
+                }
+            }
+
+            // Start timing
+            if (timing == false) {
+                timing = true;
+                setInterval(() => {
+                    if (timing == true) {
+                        if (timer[2] < 99) {
+                            timer[2] = timer[2] + 1;
+                        } else {
+                            timer[2] = 0;
+                            timer[1] = timer[1] + 1;
+                        }
+
+                        if (timer[1] >= 60) {
+                            timer[1] = 0;
+                            timer[0] = timer[0] + 1;
+                        }
+                    }
+                }, 10);
+            }
         }
-    }
-
-    check_win();
-
-    let timer: Array<number> = [0, 0, 0];
-    function time() {
-        setInterval(() => {
-            if (timer[2] < 99) {
-                timer[2] = timer[2] + 1;
-            } else {
-                timer[2] = 0;
-                timer[1] = timer[1] + 1;
-            }
-
-            if (timer[1] >= 60) {
-                timer[1] = 0;
-                timer[0] = timer[0] + 1;
-            }
-        }, 10);
     }
 </script>
 
@@ -149,23 +150,22 @@
         background-color: blue;
         padding: 2vw;
         cursor: pointer;
+        user-select: none;
     }
 
     .invisible {
         background-color: transparent;
         color: transparent;
         cursor: default;
-        user-select: none;
     }
 
     .disabled {
         background-color: transparent;
         color: transparent;
         cursor: default;
-        user-select: none;
     }
 
-    .visible:hover {
+    .active:hover {
         background-color: red;
     }
 
