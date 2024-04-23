@@ -30,6 +30,7 @@
     let buf: Array<number>;
     let timing: boolean = false;
     let timer: Array<number> = [0, 0, 0];
+    let game_log: Array<Array<Array<number>>> = [];
 
     function handle_click(i: number, j: number) {
         if (map[i][j] == "active") {
@@ -88,6 +89,12 @@
             map[i][j] = "active";
             map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
             map[buf[0]][buf[1]] = "invisible";
+
+            // Add move to game log
+            game_log.push([
+                [buf[0], buf[1]],
+                [i, j],
+            ]);
 
             // Check if the player has won
             let count = 0;
