@@ -1,7 +1,10 @@
 ---
 import Player from "../components/Player.svelte";
+import Timer from "../components/Timer.svelte";
 
-import { Alert } from "../components/Alert.tsx";
+import { Alert } from "../components/Alert";
+import { Navigation } from "../components/Navigation";
+
 import { Badge } from "@/components/ui/badge";
 
 import "@/styles/globals.css";
@@ -16,14 +19,20 @@ import "@/styles/globals.css";
 		<title>GENIUSZ</title>
 	</head>
 	<body class="bg-neutral-200">
-		<header class="py-3 px-14 mb-3 border-b border-neutral-400">
-			<div class="container flex max-w-screen-2xl items-center">
-				<div class="flex items-center gap-4">
-					<h1 class="text-xl font-[GeistBold]">Geniusz</h1>
+		<header
+			class="flex items-center px-1 mb-3 h-14 border-b md:px-14 border-neutral-400"
+		>
+			<div class="container flex items-center max-w-screen-2xl">
+				<div class="flex gap-4 items-center">
+					<h1 class="text-xl font-[GeistBold] hidden md:inline">
+						Geniusz
+					</h1>
 					<a href="/"><Badge variant="destructive">Reset</Badge></a>
 				</div>
-				<div class="flex flex-1 justify-end">
+				<div class="flex flex-1 gap-4 justify-end items-baseline">
+					<Timer client:load />
 					<Alert client:idle />
+					<Navigation client:load />
 				</div>
 			</div>
 		</header>

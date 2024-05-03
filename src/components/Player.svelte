@@ -1,4 +1,8 @@
 <script lang="ts">
+    import { doTiming } from "../lib/stores";
+
+    import Square from "./Square.svelte";
+
     const INVISIBLES: Array<number> = [0, 1, 5, 6];
 
     let rows: Array<number> = [];
@@ -10,6 +14,10 @@
     for (let j = 0; j < 7; j++) {
         fields.push(j);
     }
+
+    const ACTIVE = "";
+    const INACTIVE = "";
+    const DISABLED = "";
 
     let map: Array<Array<string>> = [];
     for (let k = 0; k < 7; k++) {
@@ -90,6 +98,9 @@
             map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
             map[buf[0]][buf[1]] = "invisible";
 
+            // Start timing
+            doTiming.set(true);
+
             // Add move to game log
             game_log.push([
                 [buf[0], buf[1]],
@@ -112,45 +123,20 @@
                     location.reload();
                 }
             }
-
-            // Start timing
-            if (timing == false) {
-                timing = true;
-                setInterval(() => {
-                    if (timing == true) {
-                        if (timer[2] < 99) {
-                            timer[2] = timer[2] + 1;
-                        } else {
-                            timer[2] = 0;
-                            timer[1] = timer[1] + 1;
-                        }
-
-                        if (timer[1] >= 60) {
-                            timer[1] = 0;
-                            timer[0] = timer[0] + 1;
-                        }
-                    }
-                }, 10);
-            }
         }
     }
 </script>
 
-<p>
-    {timer[0]}:{timer[1] < 10 ? 0 + timer[1].toString() : timer[1]}:{timer[2] <
-    10
-        ? 0 + timer[2].toString()
-        : timer[2]}
-</p>
-<table>
+<table class="flex justify-center items-center">
     <tbody>
         {#each rows as row, i}
             <tr id={i.toString()}>
                 {#each fields as field, j}
                     <th
-                        class={map[i][j]}
                         id="{i}:{j}"
-                        on:click={() => handle_click(i, j)}>{i}:{j}</th
+                        on:click={() => handle_click(i, j)}>
+                            <Square />
+                        </th
                     >
                 {/each}
             </tr>
@@ -159,7 +145,7 @@
 </table>
 
 <style>
-    th {
+    /* th {
         background-color: blue;
         padding: 2vw;
         cursor: pointer;
@@ -184,7 +170,7 @@
 
     .destination {
         background-color: purple !important;
-    }
+    } 
 
     table {
         display: flex;
@@ -197,5 +183,5 @@
         font-size: 24px;
         font-weight: bold;
         position: fixed;
-    }
+    } */
 </style>

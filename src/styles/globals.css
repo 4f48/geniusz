@@ -91,3 +91,11 @@
     font-style: normal;
     font-display: swap;
   }
+
+  @font-face {
+    font-family: 'GeistMono';
+    src: url('/fonts/GeistMono-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
