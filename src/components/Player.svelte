@@ -1,4 +1,8 @@
 <script lang="ts">
+    import { doTiming } from "../lib/stores";
+
+    import Square from "./Square.svelte";
+
     const INVISIBLES: Array<number> = [0, 1, 5, 6];
 
     let rows: Array<number> = [];
@@ -16,9 +20,9 @@
         const temp: Array<string> = [];
         for (let l = 0; l < 7; l++) {
             if (INVISIBLES.includes(k) && INVISIBLES.includes(l)) {
-                temp.push("disabled");
-            } else if (k == 3 && l == 3) {
                 temp.push("invisible");
+            } else if (k == 3 && l == 3) {
+                temp.push("inactive");
             } else {
                 temp.push("active");
             }
@@ -28,8 +32,6 @@
 
     let destinations: Array<Array<number>> = [];
     let buf: Array<number>;
-    let timing: boolean = false;
-    let timer: Array<number> = [0, 0, 0];
     let game_log: Array<Array<Array<number>>> = [];
 
     function handle_click(i: number, j: number) {
@@ -39,7 +41,7 @@
             for (const row in map) {
                 for (const square in map[row]) {
                     if (map[row][square] == "destination") {
-                        map[row][square] = "invisible";
+                        map[row][square] = "inactive";
                     }
                 }
             }
@@ -68,7 +70,7 @@
 
             for (const destination of destinations) {
                 try {
-                    if (map[destination[0]][destination[1]] == "invisible") {
+                    if (map[destination[0]][destination[1]] == "inactive") {
                         map[destination[0]][destination[1]] = "destination";
                     }
                 } catch {}
@@ -81,14 +83,17 @@
             for (const row in map) {
                 for (const square in map[row]) {
                     if (map[row][square] == "destination") {
-                        map[row][square] = "invisible";
+                        map[row][square] = "inactive";
                     }
                 }
             }
 
             map[i][j] = "active";
-            map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
-            map[buf[0]][buf[1]] = "invisible";
+            map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "inactive";
+            map[buf[0]][buf[1]] = "inactive";
+
+            // Start timing
+            doTiming.set(true);
 
             // Add move to game log
             game_log.push([
@@ -112,46 +117,18 @@
                     location.reload();
                 }
             }
-
-            // Start timing
-            if (timing == false) {
-                timing = true;
-                setInterval(() => {
-                    if (timing == true) {
-                        if (timer[2] < 99) {
-                            timer[2] = timer[2] + 1;
-                        } else {
-                            timer[2] = 0;
-                            timer[1] = timer[1] + 1;
-                        }
-
-                        if (timer[1] >= 60) {
-                            timer[1] = 0;
-                            timer[0] = timer[0] + 1;
-                        }
-                    }
-                }, 10);
-            }
         }
     }
 </script>
 
-<p>
-    {timer[0]}:{timer[1] < 10 ? 0 + timer[1].toString() : timer[1]}:{timer[2] <
-    10
-        ? 0 + timer[2].toString()
-        : timer[2]}
-</p>
-<table>
+<table class="flex justify-center items-center">
     <tbody>
         {#each rows as row, i}
             <tr id={i.toString()}>
                 {#each fields as field, j}
-                    <th
-                        class={map[i][j]}
-                        id="{i}:{j}"
-                        on:click={() => handle_click(i, j)}>{i}:{j}</th
-                    >
+                    <th id="{i}:{j}" on:click={() => handle_click(i, j)}>
+                        <Square type={map[i][j]} />
+                    </th>
                 {/each}
             </tr>
         {/each}
@@ -159,7 +136,7 @@
 </table>
 
 <style>
-    th {
+    /* th {
         background-color: blue;
         padding: 2vw;
         cursor: pointer;
@@ -184,7 +161,7 @@
 
     .destination {
         background-color: purple !important;
-    }
+    } 
 
     table {
         display: flex;
@@ -197,5 +174,5 @@
         font-size: 24px;
         font-weight: bold;
         position: fixed;
-    }
+    } */
 </style>
