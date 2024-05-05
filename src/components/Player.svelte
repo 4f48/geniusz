@@ -15,18 +15,14 @@
         fields.push(j);
     }
 
-    const ACTIVE = "";
-    const INACTIVE = "";
-    const DISABLED = "";
-
     let map: Array<Array<string>> = [];
     for (let k = 0; k < 7; k++) {
         const temp: Array<string> = [];
         for (let l = 0; l < 7; l++) {
             if (INVISIBLES.includes(k) && INVISIBLES.includes(l)) {
-                temp.push("disabled");
-            } else if (k == 3 && l == 3) {
                 temp.push("invisible");
+            } else if (k == 3 && l == 3) {
+                temp.push("inactive");
             } else {
                 temp.push("active");
             }
@@ -36,8 +32,6 @@
 
     let destinations: Array<Array<number>> = [];
     let buf: Array<number>;
-    let timing: boolean = false;
-    let timer: Array<number> = [0, 0, 0];
     let game_log: Array<Array<Array<number>>> = [];
 
     function handle_click(i: number, j: number) {
@@ -76,7 +70,7 @@
 
             for (const destination of destinations) {
                 try {
-                    if (map[destination[0]][destination[1]] == "invisible") {
+                    if (map[destination[0]][destination[1]] == "inactive") {
                         map[destination[0]][destination[1]] = "destination";
                     }
                 } catch {}
@@ -89,14 +83,14 @@
             for (const row in map) {
                 for (const square in map[row]) {
                     if (map[row][square] == "destination") {
-                        map[row][square] = "invisible";
+                        map[row][square] = "inactive";
                     }
                 }
             }
 
             map[i][j] = "active";
-            map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "invisible";
-            map[buf[0]][buf[1]] = "invisible";
+            map[(i + buf[0]) / 2][(j + buf[1]) / 2] = "inactive";
+            map[buf[0]][buf[1]] = "inactive";
 
             // Start timing
             doTiming.set(true);
@@ -132,12 +126,9 @@
         {#each rows as row, i}
             <tr id={i.toString()}>
                 {#each fields as field, j}
-                    <th
-                        id="{i}:{j}"
-                        on:click={() => handle_click(i, j)}>
-                            <Square />
-                        </th
-                    >
+                    <th id="{i}:{j}" on:click={() => handle_click(i, j)}>
+                        <Square type={map[i][j]} />
+                    </th>
                 {/each}
             </tr>
         {/each}
