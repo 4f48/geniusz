@@ -41,7 +41,7 @@
             for (const row in map) {
                 for (const square in map[row]) {
                     if (map[row][square] == "destination") {
-                        map[row][square] = "invisible";
+                        map[row][square] = "inactive";
                     }
                 }
             }
