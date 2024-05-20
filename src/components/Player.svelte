@@ -32,7 +32,9 @@
 
     let destinations: Array<Array<number>> = [];
     let buf: Array<number>;
-    let game_log: Array<Array<Array<number>>> = [];
+    let game_log: { moves: Array<Array<Array<number>>> } = {
+        moves: [],
+    };
 
     function handle_click(i: number, j: number) {
         if (map[i][j] == "active") {
@@ -96,7 +98,7 @@
             doTiming.set(true);
 
             // Add move to game log
-            game_log.push([
+            game_log.moves.push([
                 [buf[0], buf[1]],
                 [i, j],
             ]);
