@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { doTiming } from "../lib/stores";
+    import { doTiming, log } from "../lib/stores";
 
     import Square from "./Square.svelte";
 
@@ -32,9 +32,6 @@
 
     let destinations: Array<Array<number>> = [];
     let buf: Array<number>;
-    let game_log: { moves: Array<Array<Array<number>>> } = {
-        moves: [],
-    };
 
     function handle_click(i: number, j: number) {
         if (map[i][j] == "active") {
@@ -98,10 +95,12 @@
             doTiming.set(true);
 
             // Add move to game log
-            game_log.moves.push([
+            let moves = log.get().moves;
+            moves.push([
                 [buf[0], buf[1]],
                 [i, j],
             ]);
+            log.setKey("moves", moves);
 
             // Check if the player has won
             let count = 0;
