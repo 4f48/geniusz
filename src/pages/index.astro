@@ -28,10 +28,6 @@ import "@/styles/globals.css";
 						Geniusz
 					</h1>
 					<a href="/"><Badge variant="destructive">Reset</Badge></a>
-					<button class="db hidden"
-						><Badge variant="outline" id="db">Test DB</Badge
-						></button
-					>
 				</div>
 				<div class="flex flex-1 gap-4 justify-end items-baseline">
 					<Timer client:load />
@@ -43,39 +39,3 @@ import "@/styles/globals.css";
 		<Player client:load />
 	</body>
 </html>
-
-<script>
-	// TODO: REWRITE EVERYTHING WITH VERCEL POSTGRES SDK
-	
-	// import { log, time } from "@/lib/stores";
-
-	// const buttons = document.querySelectorAll("button.db");
-	// buttons.forEach((button) => {
-	// 	button.addEventListener("click", () => {
-	// 		console.log("Push!");
-	// 		main()
-	// 			.then(async () => {
-	// 				await prisma.$disconnect();
-	// 			})
-	// 			.catch(async (e) => {
-	// 				console.error(e);
-	// 				await prisma.$disconnect;
-	// 			});
-	// 	});
-	// });
-
-	// console.log(buttons);
-
-	// async function main() {
-	// 	await prisma.leaderboard.create({
-	// 		data: {
-	// 			moves: log.get().moves,
-	// 			time:
-	// 				time.get().ms + time.get().s * 1000 + time.get().m * 60000,
-	// 			player: "Test",
-	// 		},
-	// 	});
-
-	// 	console.log(await prisma.leaderboard.findMany({ take: 10 }));
-	// }
-</script>

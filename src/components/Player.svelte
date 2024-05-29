@@ -101,6 +101,7 @@
                 [i, j],
             ]);
             log.setKey("moves", moves);
+            console.log(moves);
 
             // Check if the player has won
             let count = 0;
