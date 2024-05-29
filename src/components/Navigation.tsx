@@ -17,6 +17,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button";
+import { Badge } from "./ui/badge";
 
 
 export function Navigation() {
@@ -27,7 +28,11 @@ export function Navigation() {
             </SheetTrigger>
             <SheetContent>
                 <SheetHeader>
-                    <SheetTitle className="font-[GeistBold]">Geniusz</SheetTitle>
+                    <div className="flex items-center justify-center gap-2">
+                        <SheetTitle className="font-[GeistBold]">Geniusz</SheetTitle>
+                        <Badge>Beta</Badge>
+                    </div>
+
                 </SheetHeader>
                 <nav className="flex flex-col justify-center pt-4">
                     <Button variant="link">About</Button>
