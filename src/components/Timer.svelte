@@ -1,5 +1,11 @@
 <script lang="ts">
-    import { doTiming } from "../lib/stores";
+    import { doTiming, time } from "../lib/stores";
+
+    let ms = 0;
+    let s = 0;
+    let m = 0;
+
+    let timer = "00:00:00";
 
     doTiming.subscribe((value) => {
         if (value == true) {
@@ -21,11 +27,15 @@
         }
     });
 
-    let ms = 0;
-    let s = 0;
-    let m = 0;
-
-    let timer = "00:00:00";
+    doTiming.listen((doTiming) => {
+        if (doTiming == false) {
+            time.set({
+                ms: ms,
+                s: s,
+                m: m,
+            });
+        }
+    });
 </script>
 
 <span class="font-[GeistMono]">{timer}</span>

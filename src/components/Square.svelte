@@ -31,6 +31,6 @@
 {/if}
 {#if type == "invisible"}
     <div
-        class="group border w-[12vw] h-[12vw] md:w-[6vw] md:h-[6vw] m-1 rounded-lg cursor-default"
+        class="group border border-transparent w-[12vw] h-[12vw] md:w-[6vw] md:h-[6vw] m-1 rounded-lg cursor-default"
     ></div>
 {/if}
