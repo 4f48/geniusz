@@ -6,9 +6,9 @@
 	import { Input } from "$lib/components/ui/input/index.js";
 	import Button from "@/components/ui/button/button.svelte";
 
-	import { openPublish } from "@/stores";
+	import { name, openPublish } from "@/stores";
+	import { enhance } from "$app/forms";
 	let openAlert: boolean;
-	let name: string;
 </script>
 
 <svelte:head>
@@ -31,7 +31,7 @@
 		</Dialog.Header>
 
 		<form method="POST" class="flex flex-col gap-4">
-			<Input type="text" id="name" placeholder="Username" bind:value={name} />
+			<Input type="text" id="name" placeholder="Username" bind:value={$name} />
 			<Button>Submit</Button>
 		</form>
 		
