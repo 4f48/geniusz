@@ -19,7 +19,7 @@ export const actions = {
 			});
 		}
 
-		console.log(form);
+		console.log(form.data.name);
 		return {
 			form
 		};

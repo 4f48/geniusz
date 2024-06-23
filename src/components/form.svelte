@@ -3,6 +3,7 @@
 	import { Input } from "$lib/components/ui/input/index.js";
 
 	import { formSchema, type FormSchema } from "@/forms";
+	import { openPublish } from "@/stores";
 	import { type SuperValidated, type Infer, superForm } from "sveltekit-superforms";
 	import { zodClient } from "sveltekit-superforms/adapters";
 
@@ -22,5 +23,5 @@
 		<Form.Description>This will be displayed with your game publicly.</Form.Description>
 		<Form.FieldErrors />
 	</Form.Field>
-	<Form.Button>Submit</Form.Button>
+	<Form.Button on:click={() => ($openPublish = false)}>Submit</Form.Button>
 </form>
