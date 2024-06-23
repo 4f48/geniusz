@@ -1,8 +1,13 @@
-import { superValidate } from "sveltekit-superforms";
-import { formSchema } from "@/forms";
-import { zod } from "sveltekit-superforms/adapters";
-import type { PageServerLoad, Actions } from "./$types.js";
 import { fail } from "@sveltejs/kit";
+import type { PageServerLoad, Actions } from "./$types.js";
+
+import { superValidate } from "sveltekit-superforms";
+import { zod } from "sveltekit-superforms/adapters";
+
+import { db } from "@/server/db/index";
+import { leaderboard } from "@/server/db/schema";
+
+import { formSchema } from "@/forms";
 
 export const load: PageServerLoad = async () => {
 	return {
@@ -20,14 +25,12 @@ export const actions = {
 			});
 		}
 
-		const data = {
-			name: form.data.name,
+		await db.insert(leaderboard).values({
+			player: form.data.name,
 			time: form.data.time,
-			log: form.data.log.moves
-		}
+			moves: form.data.log
+		});
 
-		console.log(data.log[0]);
-		
 		return {
 			form
 		};
