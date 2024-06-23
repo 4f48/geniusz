@@ -1,17 +1,25 @@
-import type { Actions } from './$types';
-import type { PageServerLoad } from "./$types.js";
 import { superValidate } from "sveltekit-superforms";
 import { formSchema } from "@/forms";
 import { zod } from "sveltekit-superforms/adapters";
- 
+import type { PageServerLoad, Actions } from "./$types.js";
+import { fail } from "@sveltejs/kit";
+
 export const load: PageServerLoad = async () => {
-  return {
-    form: await superValidate(zod(formSchema)),
-  };
+	return {
+		form: await superValidate(zod(formSchema))
+	};
 };
 
 export const actions = {
-    default: async (event) => {
-        // TODO: Implement server side logic to insert row to DB
-    },
+	default: async (event) => {
+		const form = await superValidate(event, zod(formSchema));
+		if (!form.valid) {
+			return fail(400, {
+				form
+			});
+		}
+		return {
+			form
+		};
+	}
 } satisfies Actions;
