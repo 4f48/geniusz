@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from "./$types.js";
-	import Form from "./form.svelte";
+	import Form from "../components/form.svelte";
 	export let data: PageData;
 
 	import Player from "../components/player.svelte";
