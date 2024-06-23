@@ -11,15 +11,23 @@ export const load: PageServerLoad = async () => {
 };
 
 export const actions = {
-	default: async (event) => {
-		const form = await superValidate(event, zod(formSchema));
+	default: async ({ request }) => {
+		const formData = await request.formData();
+		const form = await superValidate(formData, zod(formSchema));
 		if (!form.valid) {
 			return fail(400, {
 				form
 			});
 		}
 
-		console.log(form.data.name);
+		const data = {
+			name: form.data.name,
+			time: form.data.time,
+			log: form.data.log.moves
+		}
+
+		console.log(data.log[0]);
+		
 		return {
 			form
 		};
