@@ -7,6 +7,7 @@
 	import Button from "@/components/ui/button/button.svelte";
 
 	import { openPublish } from "@/stores";
+	let openAlert: boolean;
 	let name: string;
 </script>
 
@@ -28,26 +29,26 @@
 			<Dialog.Title class="flex items-center gap-2">You are a GENIUSZ!</Dialog.Title>
 			<Dialog.Description>You may now publish your game to the leaderboard.</Dialog.Description>
 		</Dialog.Header>
-		<Input type="text" id="name" placeholder="Username" bind:value={name} />
 
-		<Dialog.Footer>
-			<AlertDialog.Root>
-				<AlertDialog.Trigger>
-					<Button variant="destructive">Don't publish</Button>
-				</AlertDialog.Trigger>
-				<AlertDialog.Content>
-					<AlertDialog.Header>
-						<AlertDialog.Title>Are you sure?</AlertDialog.Title>
-						<AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
-					</AlertDialog.Header>
-					<AlertDialog.Footer>
-						<AlertDialog.Action>Take me back</AlertDialog.Action>
-						<AlertDialog.Cancel on:click={() => ($openPublish = false)}>I'm sure</AlertDialog.Cancel
-						>
-					</AlertDialog.Footer>
-				</AlertDialog.Content>
-			</AlertDialog.Root>
-			<Button disabled>Submit</Button>
-		</Dialog.Footer>
+		<form method="POST" class="flex flex-col gap-4">
+			<Input type="text" id="name" placeholder="Username" bind:value={name} />
+			<Button>Submit</Button>
+		</form>
+		
+		<Button variant="destructive" on:click={() => (openAlert = true)}>Don't publish</Button>
+		<AlertDialog.Root bind:open={openAlert}>
+			<AlertDialog.Trigger>
+			</AlertDialog.Trigger>
+			<AlertDialog.Content>
+				<AlertDialog.Header>
+					<AlertDialog.Title>Are you sure?</AlertDialog.Title>
+					<AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
+				</AlertDialog.Header>
+				<AlertDialog.Footer>
+					<AlertDialog.Action>Take me back</AlertDialog.Action>
+					<AlertDialog.Cancel on:click={() => ($openPublish = false)}>I'm sure</AlertDialog.Cancel>
+				</AlertDialog.Footer>
+			</AlertDialog.Content>
+		</AlertDialog.Root>
 	</Dialog.Content>
 </Dialog.Root>
