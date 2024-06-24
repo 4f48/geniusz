@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { sql } from "@vercel/postgres";
-	import { drizzle } from "drizzle-orm/vercel-postgres";
-	import { Leaderboard } from "@/schema";
+	// import { sql } from "@vercel/postgres";
+	// import { drizzle } from "drizzle-orm/vercel-postgres";
+	// import { Leaderboard } from "@/schema";
 	// import { db } from "@/db.server"; NO WORKY
 
 	import * as Dialog from "$lib/components/ui/dialog";
