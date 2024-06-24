@@ -1,7 +1,9 @@
-import { pgTable, serial, text, integer } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, json, integer, timestamp } from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
-	id: serial("id").primaryKey(),
-	name: text("name").notNull(),
-	age: integer("age")
+export const leaderboard = pgTable("leaderboard", {
+	id: serial("id").unique().primaryKey(),
+	player: varchar("player", { length: 20 }).notNull(),
+	moves: json("moves").notNull(),
+	time: integer("time").notNull(),
+	date: timestamp("date").defaultNow().notNull()
 });
