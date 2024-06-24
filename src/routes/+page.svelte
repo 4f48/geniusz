@@ -38,7 +38,9 @@
 			<AlertDialog.Content>
 				<AlertDialog.Header>
 					<AlertDialog.Title>Are you sure?</AlertDialog.Title>
-					<AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
+					<AlertDialog.Description
+						>This action cannot be undone. Your game will be lost forever.</AlertDialog.Description
+					>
 				</AlertDialog.Header>
 				<AlertDialog.Footer>
 					<AlertDialog.Action>Take me back</AlertDialog.Action>
