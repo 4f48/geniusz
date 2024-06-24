@@ -119,7 +119,6 @@
 </script>
 
 <table class="flex items-center justify-center">
-<table class="flex items-center justify-center">
 	<tbody>
 		{#each rows as _row, i}
 			<tr id={i.toString()}>
