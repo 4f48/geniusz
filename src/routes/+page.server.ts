@@ -18,6 +18,8 @@ export const actions = {
 				form
 			});
 		}
+
+		console.log(form);
 		return {
 			form
 		};
