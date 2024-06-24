@@ -29,12 +29,7 @@
 		<nav class="ml-4 flex items-center gap-4">
 			<a href="/about"><Button variant="link">About</Button></a>
 			<a href="/playing"><Button variant="link">How to play</Button></a>
-			<Tooltip.Root>
-				<Tooltip.Trigger>
-					<Button variant="link" disabled>Leaderboard</Button>
-				</Tooltip.Trigger>
-				<Tooltip.Content>This feature is not available at the moment.</Tooltip.Content>
-			</Tooltip.Root>
+			<a href="/leaderboard"><Button variant="link">Leaderboard</Button></a>
 		</nav>
 	</div>
 
