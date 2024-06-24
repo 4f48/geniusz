@@ -10,7 +10,7 @@ on:
     branches: ["main"]
 
 env:
-  POSTGRES_URL: postgres://placeholder:required@to/build"
+  POSTGRES_URL: postgres://placeholder:required@to/build
       - run: npm i
       - run: npm run lint
   check:
