@@ -9,7 +9,7 @@
 	import * as AlertDialog from "$lib/components/ui/alert-dialog";
 	import Button from "@/components/ui/button/button.svelte";
 
-	import { openPublish } from "@/stores";
+	import { doTiming, openPublish } from "@/stores";
 	let openAlert: boolean;
 </script>
 
@@ -21,11 +21,9 @@
 	/>
 </svelte:head>
 
-<Player />
-
 <Dialog.Root bind:open={$openPublish}>
 	<!-- Remove later -->
-	<Dialog.Trigger>DB</Dialog.Trigger>
+	<Dialog.Trigger on:click={() => ($doTiming = false)}>DB</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title class="flex items-center gap-2">You are a GENIUSZ!</Dialog.Title>
@@ -50,3 +48,5 @@
 		</AlertDialog.Root>
 	</Dialog.Content>
 </Dialog.Root>
+
+<Player />
