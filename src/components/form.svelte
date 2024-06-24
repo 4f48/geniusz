@@ -4,20 +4,25 @@
 	import { toast } from "svelte-sonner";
 
 	import { formSchema, type FormSchema } from "@/forms";
-	import { openPublish } from "@/stores";
+	import { openPublish, time, log } from "@/stores";
 	import { type SuperValidated, type Infer, superForm } from "sveltekit-superforms";
 	import { zodClient } from "sveltekit-superforms/adapters";
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	const form = superForm(data, {
+		dataType: "json",
 		validators: zodClient(formSchema),
-		onUpdated: ({ form: f}) => {
+		onUpdated: ({ form: f }) => {
 			if (f.valid) {
 				$openPublish = false;
-				toast.success("Successfully submitted your game to the leaderboard.")
+				toast.success("Successfully submitted your game to the leaderboard.");
 			} else {
-				toast.error("Something went wrong publishing your game. Please try again.")
+				toast.error("Something went wrong publishing your game. Please try again.");
 			}
+		},
+		onSubmit({ formData }) {
+			$formData.time = 3; // $time.ms + $time.s * 1000 + $time.m * 60000;
+			$formData.log = $log;
 		},
 	});
 	const { form: formData, enhance } = form;
