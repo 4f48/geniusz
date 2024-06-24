@@ -1,14 +1,15 @@
 <script lang="ts">
-
+	import type { PageData } from "./$types.js";
+	import Form from "./form.svelte";
+	export let data: PageData;
 
 	import Player from "../components/player.svelte";
 
 	import * as Dialog from "$lib/components/ui/dialog";
 	import * as AlertDialog from "$lib/components/ui/alert-dialog";
-	import { Input } from "$lib/components/ui/input/index.js";
 	import Button from "@/components/ui/button/button.svelte";
 
-	import { name, openPublish } from "@/stores";
+	import { openPublish } from "@/stores";
 	let openAlert: boolean;
 </script>
 
@@ -31,15 +32,11 @@
 			<Dialog.Description>You may now publish your game to the leaderboard.</Dialog.Description>
 		</Dialog.Header>
 
-		<form method="POST" class="flex flex-col gap-4">
-			<Input type="text" id="name" placeholder="Username" bind:value={$name} />
-			<Button>Submit</Button>
-		</form>
-		
+		<Form data={data.form} />
+
 		<Button variant="destructive" on:click={() => (openAlert = true)}>Don't publish</Button>
 		<AlertDialog.Root bind:open={openAlert}>
-			<AlertDialog.Trigger>
-			</AlertDialog.Trigger>
+			<AlertDialog.Trigger></AlertDialog.Trigger>
 			<AlertDialog.Content>
 				<AlertDialog.Header>
 					<AlertDialog.Title>Are you sure?</AlertDialog.Title>
