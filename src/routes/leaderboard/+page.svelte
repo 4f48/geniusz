@@ -27,7 +27,7 @@
 				{#each data.result as entry}
 					<Table.Row>
 						<Table.Cell>{entry.player}</Table.Cell>
-						<Table.Cell>{entry.time}</Table.Cell>
+						<Table.Cell class="font-mono">{`${Math.floor(entry.time / 60000) < 10 ? 0 + Math.floor(entry.time / 60000).toString() : Math.floor(entry.time / 60000)}:${Math.floor((entry.time % 60000) / 1000) < 10 ? 0 + Math.floor((entry.time % 60000) / 1000).toString() : Math.floor((entry.time % 60000) / 1000)}:${(entry.time % 1000) < 10 ? 0 + (entry.time % 1000).toString() : entry.time % 1000}`}</Table.Cell>
 						<Table.Cell>
 							<Tooltip.Root>
 								<Tooltip.Trigger>
