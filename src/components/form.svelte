@@ -1,6 +1,7 @@
 <script lang="ts">
 	import * as Form from "$lib/components/ui/form";
 	import { Input } from "$lib/components/ui/input/index.js";
+	import { toast } from "svelte-sonner";
 
 	import { formSchema, type FormSchema } from "@/forms";
 	import { openPublish } from "@/stores";
@@ -9,7 +10,15 @@
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	const form = superForm(data, {
-		validators: zodClient(formSchema)
+		validators: zodClient(formSchema),
+		onUpdated: ({ form: f}) => {
+			if (f.valid) {
+				$openPublish = false;
+				toast.success("Successfully submitted your game to the leaderboard.")
+			} else {
+				toast.error("Something went wrong publishing your game. Please try again.")
+			}
+		},
 	});
 	const { form: formData, enhance } = form;
 </script>
@@ -20,8 +29,8 @@
 			<Form.Label>Name</Form.Label>
 			<Input {...attrs} bind:value={$formData.name} />
 		</Form.Control>
-		<Form.Description>This will be displayed with your game publicly.</Form.Description>
+		<Form.Description>This will be displayed publicly on the leaderboard.</Form.Description>
 		<Form.FieldErrors />
 	</Form.Field>
-	<Form.Button on:click={() => ($openPublish = false)}>Submit</Form.Button>
+	<Form.Button>Submit</Form.Button>
 </form>

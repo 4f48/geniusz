@@ -32,6 +32,9 @@ importers:
       svelte-radix:
         specifier: ^1.1.0
         version: 1.1.0(svelte@4.2.17)
+      svelte-sonner:
+        specifier: ^0.3.24
+        version: 0.3.24(svelte@4.2.17)
       sveltekit-superforms:
         specifier: ^2.15.1
         version: 2.15.1(@sveltejs/kit@2.5.10(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.17)(vite@5.2.12(@types/node@20.14.0)))(svelte@4.2.17)(vite@5.2.12(@types/node@20.14.0)))(svelte@4.2.17)
@@ -2089,6 +2092,11 @@ packages:
     peerDependencies:
       svelte: ^3.54.0 || ^4.0.0 || ^5.0.0
 
+  svelte-sonner@0.3.24:
+    resolution: {integrity: sha512-txuL0JBUs0v6qGrr0PGCsbXmKHuthdrAkfISYi8umuveF7+gINb6EXl6VmKY9aHhyxCqvVgqd6yophQNrnor4w==}
+    peerDependencies:
+      svelte: '>=3 <5'
+
   svelte@4.2.17:
     resolution: {integrity: sha512-N7m1YnoXtRf5wya5Gyx3TWuTddI4nAyayyIWFojiWV5IayDYNV5i2mRp/7qNGol4DtxEYxljmrbgp1HM6hUbmQ==}
     engines: {node: '>=16'}
@@ -4029,6 +4037,10 @@ snapshots:
       typescript: 5.4.5
 
   svelte-radix@1.1.0(svelte@4.2.17):
+    dependencies:
+      svelte: 4.2.17
+
+  svelte-sonner@0.3.24(svelte@4.2.17):
     dependencies:
       svelte: 4.2.17
 
