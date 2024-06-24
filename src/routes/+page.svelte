@@ -22,8 +22,6 @@
 </svelte:head>
 
 <Dialog.Root bind:open={$openPublish}>
-	<!-- Remove later -->
-	<Dialog.Trigger on:click={() => ($doTiming = false)}>DB</Dialog.Trigger>
 	<Dialog.Content>
 		<Dialog.Header>
 			<Dialog.Title class="flex items-center gap-2">You are a GENIUSZ!</Dialog.Title>

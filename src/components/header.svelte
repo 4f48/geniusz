@@ -23,7 +23,7 @@
 				<a href="/" class="text-xl font-bold duration-75 hover:text-muted-foreground">geniusz</a>
 			</Tooltip.Trigger>
 			<Tooltip.Content>
-				<p class="font-mono">version: sveltekit-rewrite-indev</p>
+				<p class="font-mono">version: 1.0.0</p>
 			</Tooltip.Content>
 		</Tooltip.Root>
 		<nav class="ml-4 flex items-center gap-4">
