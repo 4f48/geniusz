@@ -4,10 +4,9 @@
 
 	import * as Table from "$lib/components/ui/table";
 	import Button from "@/components/ui/button/button.svelte";
-	import * as Tooltip from "@/components/ui/tooltip";
 	import { Download } from "lucide-svelte";
 
-	function download(moves: any) {
+	function download(moves: string) {
 		const blob = new Blob([moves], { type: "application/json" });
 		const url = URL.createObjectURL(blob);
 		return url;
