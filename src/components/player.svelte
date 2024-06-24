@@ -1,23 +1,11 @@
 <script lang="ts">
-	// import { sql } from "@vercel/postgres";
-	// import { drizzle } from "drizzle-orm/vercel-postgres";
-	// import { Leaderboard } from "@/schema";
-	// import { db } from "@/db.server"; NO WORKY
-
-	import * as Dialog from "$lib/components/ui/dialog";
-	import * as AlertDialog from "$lib/components/ui/alert-dialog";
-	import { Input } from "$lib/components/ui/input/index.js";
-	import Button from "@/components/ui/button/button.svelte";
-
 	import Square from "./square.svelte";
 
-	import { doTiming, log } from "@/stores";
+	import { doTiming, log, openPublish } from "@/stores";
 
 	const INVISIBLES: Array<number> = [0, 1, 5, 6];
 	let destinations: Array<Array<number>>;
 	let buf: Array<number>;
-	let open: boolean;
-
 	let rows: Array<number> = [];
 	for (let i = 0; i < 7; i++) {
 		rows.push(i);
@@ -54,7 +42,7 @@
 		}
 
 		if (count == 1) {
-			open = true;
+			$openPublish = true;
 		}
 	}
 
@@ -128,13 +116,6 @@
 	}
 
 	let name: string;
-	async function submit(name: string) {
-		// await db.insert(Leaderboard).values({
-		// 	player: name, // implement form validation later™
-		// 	time: 0, // for testing purposes,
-		// 	moves: $log
-		// });
-	}
 </script>
 
 <table class="flex items-center justify-center">
@@ -150,34 +131,3 @@
 		{/each}
 	</tbody>
 </table>
-
-<Dialog.Root bind:open>
-	<!-- Remove later -->
-	<Dialog.Trigger>DB</Dialog.Trigger>
-	<Dialog.Content>
-		<Dialog.Header>
-			<Dialog.Title class="flex items-center gap-2">You are a GENIUSZ!</Dialog.Title>
-			<Dialog.Description>You may now publish your game to the leaderboard.</Dialog.Description>
-		</Dialog.Header>
-		<Input type="text" id="name" placeholder="Username" bind:value={name} />
-
-		<Dialog.Footer>
-			<AlertDialog.Root>
-				<AlertDialog.Trigger>
-					<Button variant="destructive">Don't publish</Button>
-				</AlertDialog.Trigger>
-				<AlertDialog.Content>
-					<AlertDialog.Header>
-						<AlertDialog.Title>Are you sure?</AlertDialog.Title>
-						<AlertDialog.Description>This action cannot be undone.</AlertDialog.Description>
-					</AlertDialog.Header>
-					<AlertDialog.Footer>
-						<AlertDialog.Action>Take me back</AlertDialog.Action>
-						<AlertDialog.Cancel on:click={() => (open = false)}>I'm sure</AlertDialog.Cancel>
-					</AlertDialog.Footer>
-				</AlertDialog.Content>
-			</AlertDialog.Root>
-			<Button on:click={() => submit(name)} disabled>Submit</Button>
-		</Dialog.Footer>
-	</Dialog.Content>
-</Dialog.Root>
