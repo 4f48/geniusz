@@ -20,7 +20,7 @@
 	<div class="ml-36 flex flex-1 items-center justify-start gap-4">
 		<Tooltip.Root>
 			<Tooltip.Trigger>
-				<a href="/" class="text-xl font-bold">geniusz</a>
+				<a href="/" class="text-xl font-bold duration-75 hover:text-muted-foreground">geniusz</a>
 			</Tooltip.Trigger>
 			<Tooltip.Content>
 				<p class="font-mono">version: sveltekit-rewrite-indev</p>

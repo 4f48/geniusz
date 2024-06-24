@@ -42,7 +42,7 @@
 		}
 
 		if (count == 1) {
-			$openPublish = true;
+			setTimeout(() => ($openPublish = true), 1000);
 		}
 	}
 
@@ -114,8 +114,6 @@
 			check_win();
 		}
 	}
-
-	let name: string;
 </script>
 
 <table class="flex items-center justify-center">
