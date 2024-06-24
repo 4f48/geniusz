@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { type SuperValidated, type Infer, superForm } from "sveltekit-superforms";
+	import { zodClient } from "sveltekit-superforms/adapters";
+
 	import * as Form from "$lib/components/ui/form";
 	import { Input } from "$lib/components/ui/input/index.js";
 	import { toast } from "svelte-sonner";
 
 	import { formSchema, type FormSchema } from "@/forms";
 	import { openPublish, time, log } from "@/stores";
-	import { type SuperValidated, type Infer, superForm } from "sveltekit-superforms";
-	import { zodClient } from "sveltekit-superforms/adapters";
 
 	export let data: SuperValidated<Infer<FormSchema>>;
 	const form = superForm(data, {
@@ -20,10 +21,10 @@
 				toast.error("Something went wrong publishing your game. Please try again.");
 			}
 		},
-		onSubmit({ formData }) {
-			$formData.time = 3; // $time.ms + $time.s * 1000 + $time.m * 60000;
+		onSubmit() {
+			$formData.time = $time.ms + $time.s * 1000 + $time.m * 60000;
 			$formData.log = $log;
-		},
+		}
 	});
 	const { form: formData, enhance } = form;
 </script>
