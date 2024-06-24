@@ -1,9 +1,9 @@
-import { atom, map } from "nanostores";
+import { writable } from "svelte/store";
 
-export const log = map<{ moves: number[][][] }>({ moves: [] });
-export const doTiming = atom<boolean>(false);
-export const time = map<{ ms: number, s: number, m: number }>({
-    ms: 0,
-    s: 0,
-    m: 0,
+export const log = writable<{ moves: number[][][] }>({ moves: [] });
+export const doTiming = writable<boolean>(false);
+export const time = writable<{ ms: number; s: number; m: number }>({
+	ms: 0,
+	s: 0,
+	m: 0
 });
