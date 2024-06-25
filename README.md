@@ -1,38 +1,13 @@
-# create-svelte
+Geniusz (pronounced as [ɡeːnius]) is an old Slovak board game. The goal is to knock out pieces from the board until one remains.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+This game was made as one of my Hack Club Arcade projects, you can view its source code here.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 3 of the License only.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+You should have received a copy of the GNU General Public License along with this program. If not, see https://www.gnu.org/licenses/.
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+Copyright © 2024 0x4f48
