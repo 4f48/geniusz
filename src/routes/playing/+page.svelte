@@ -8,7 +8,7 @@
 </svelte:head>
 
 <div class="flex h-full w-full justify-center">
-	<div class="m-5 flex w-[50%] flex-col gap-3 rounded-md bg-muted p-5 text-justify">
+	<div class="m-5 flex w-full md:w-[50%] flex-col gap-3 rounded-md md:bg-muted md:p-5 text-justify">
 		<p>
 			Every black dot on the screen represents a piece on the board. You can jump with pieces over
 			other pieces to empty squares. When a piece gets jumped over, it gets knocked out. Your goal
