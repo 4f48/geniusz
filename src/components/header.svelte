@@ -71,28 +71,8 @@
 			<nav class="mt-4 flex flex-col space-y-2">
 				<a on:click={() => (sheetOpen = false)} href="/about">About</a>
 				<a on:click={() => (sheetOpen = false)} href="/playing">How to play</a>
-				<a
-					on:click={() => {
-						sheetOpen = false;
-						alertOpen = true;
-						console.log(alertOpen);
-					}}
-					href={$page.url.href}>Leaderboard</a
-				>
+				<a on:click={() => (sheetOpen = false)} href="/leaderboard">Leaderboard</a>
 			</nav>
 		</Sheet.Content>
 	</Sheet.Root>
-	<AlertDialog.Root bind:open={alertOpen}>
-		<AlertDialog.Content>
-			<AlertDialog.Header>
-				<AlertDialog.Title>Leaderboard coming soon</AlertDialog.Title>
-				<AlertDialog.Description
-					>This feature is not available at the moment. Check back soon.</AlertDialog.Description
-				>
-			</AlertDialog.Header>
-			<AlertDialog.Footer>
-				<AlertDialog.Cancel>Close</AlertDialog.Cancel>
-			</AlertDialog.Footer>
-		</AlertDialog.Content>
-	</AlertDialog.Root>
 </header>
