@@ -20,7 +20,7 @@
 
 <div class="mt-12 flex h-full w-full justify-center">
 	{#if data.result.length > 0}
-		<div class="w-full md:w-[50%] p-5">
+		<div class="w-full p-5 md:w-[50%]">
 			<Table.Root>
 				<Table.Header>
 					<Table.Row>
@@ -51,8 +51,8 @@
 			</Table.Root>
 		</div>
 	{:else}
-		<div class="w-full m-5 flex md:w-[30%] flex-col items-center gap-1">
-			<h1 class="text-xl font-bold text-center">No one managed to become a Geniusz yet.</h1>
+		<div class="m-5 flex w-full flex-col items-center gap-1 md:w-[30%]">
+			<h1 class="text-center text-xl font-bold">No one managed to become a Geniusz yet.</h1>
 			<a class="w-full" href="/"><Button class="w-full">Be the first. Play now!</Button></a>
 		</div>
 	{/if}

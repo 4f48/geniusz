@@ -42,6 +42,7 @@
 		}
 
 		if (count == 1) {
+			$doTiming = false;
 			setTimeout(() => ($openPublish = true), 1000);
 		}
 	}
