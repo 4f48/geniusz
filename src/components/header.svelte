@@ -22,7 +22,7 @@
 </script>
 
 <!-- Desktop header -->
-<header class="hidden h-14 items-center border-b border-foreground lg:flex">
+<header class="mb-4 hidden h-14 items-center border-b border-foreground lg:flex">
 	<div class="ml-36 flex flex-1 items-center justify-start gap-4">
 		<Tooltip.Root>
 			<Tooltip.Trigger>
@@ -52,7 +52,7 @@
 </header>
 
 <!-- Mobile header -->
-<header class="flex h-14 items-center border-b border-foreground lg:hidden">
+<header class="mb-4 flex h-14 items-center border-b border-foreground lg:hidden">
 	<div class="ml-4 flex gap-2">
 		<Button
 			variant="ghost"

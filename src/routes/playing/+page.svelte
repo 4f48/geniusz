@@ -25,7 +25,10 @@
 			up, you'll have to restart the game by clicking on the red restart button on the top right of
 			the screen.
 		</p>
-		<p>Now, only one question remains: Who will be the first Geniusz?</p>
+		<p>
+			Now, only one question remains: Who will be the best Geniusz? Compete with real players for
+			the fastest times!
+		</p>
 		<div class="flex w-full justify-center">
 			<a href="/" class="w-full"><Button class="w-full" variant="secondary">Play now!</Button></a>
 		</div>
