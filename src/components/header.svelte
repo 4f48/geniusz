@@ -2,17 +2,23 @@
 	import { page } from "$app/stores";
 
 	import * as Sheet from "$lib/components/ui/sheet";
-	import * as AlertDialog from "$lib/components/ui/alert-dialog";
 	import * as Tooltip from "$lib/components/ui/tooltip";
 	import { Badge } from "$lib/components/ui/badge";
 	import { Button } from "$lib/components/ui/button/";
 
+	import { doTiming } from "@/stores";
+
 	import Timer from "./timer.svelte";
 	import Theme from "./theme.svelte";
+	import Nav from "./nav.svelte";
 	import { Menu, RefreshCw } from "lucide-svelte";
 
 	let sheetOpen: boolean;
-	let alertOpen: boolean;
+
+	function mobile_nav() {
+		sheetOpen = false;
+		$doTiming = false;
+	}
 </script>
 
 <!-- Desktop header -->
@@ -27,9 +33,9 @@
 			</Tooltip.Content>
 		</Tooltip.Root>
 		<nav class="ml-4 flex items-center gap-4">
-			<a href="/about"><Button variant="link">About</Button></a>
-			<a href="/playing"><Button variant="link">How to play</Button></a>
-			<a href="/leaderboard"><Button variant="link">Leaderboard</Button></a>
+			<Nav href="/about">About</Nav>
+			<Nav href="/playing">How to play</Nav>
+			<Nav href="/leaderboard">Leaderboard</Nav>
 		</nav>
 	</div>
 
@@ -69,9 +75,9 @@
 		<Sheet.Content side="left" class="pr-0">
 			<a href="/" on:click={() => (sheetOpen = false)} class="text-xl font-bold">geniusz</a>
 			<nav class="mt-4 flex flex-col space-y-2">
-				<a on:click={() => (sheetOpen = false)} href="/about">About</a>
-				<a on:click={() => (sheetOpen = false)} href="/playing">How to play</a>
-				<a on:click={() => (sheetOpen = false)} href="/leaderboard">Leaderboard</a>
+				<a on:click={mobile_nav} href="/about">About</a>
+				<a on:click={mobile_nav} href="/playing">How to play</a>
+				<a on:click={mobile_nav} href="/leaderboard">Leaderboard</a>
 			</nav>
 		</Sheet.Content>
 	</Sheet.Root>
